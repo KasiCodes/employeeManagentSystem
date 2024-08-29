@@ -9,7 +9,7 @@ import com.kasiCodes.employeeManagementSystem.model.employee;
 @Service
 public interface employeeService {
 
-    public employee saveEmployee(employee employee);
+    public void saveEmployee(employee employee);
 
     public List<employee> getAllEmployees();
     
