@@ -37,5 +37,12 @@ public class employeeController {
         employeeService.saveEmployee(employee);
         return "redirect:/";
     }
+
+    @GetMapping("/showFormForUpdate")
+    public String showFormForUpdate(@ModelAttribute("employee") employee employee, Model model){
+        employee employee1 = employeeService.getEmployeeById(employee.getId());
+        model.addAttribute("employee", employee1);
+        return "update_employee";
+    }
     
 }

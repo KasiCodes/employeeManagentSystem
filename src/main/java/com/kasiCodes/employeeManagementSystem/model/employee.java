@@ -46,11 +46,19 @@ public class employee {
         this.id = id;       
     }
 
-    public String getName() {
+    public String getFirstName(){
         return firstName;
     }
-    public void setName(String name) {
-        this.firstName = name;
+
+    public String getSecondName(){
+        return secondName;
+    }
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
+
+    public void setSecondName(String secondName) {
+        this.secondName = secondName;
     }
     public String getEmail() {
         return email;
@@ -70,6 +78,4 @@ public class employee {
     public void setAddress(String address) {
         this.address = address;
     }   
-
-    
 }
