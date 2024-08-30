@@ -1,6 +1,7 @@
 package com.kasiCodes.employeeManagementSystem.service.serviceImplemetantation;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -22,7 +23,15 @@ public class employeeServiceImpl implements employeeService {
 
     @Override
     public employee getEmployeeById(long id) {
-        return employeeRepository.findById(id).get();
+        Optional<employee> optional = employeeRepository.findById(id);
+        employee employee1 = null;
+        if(optional.isPresent()){
+            employee1 = optional.get();
+        }else{
+            throw new RuntimeException("Employee not found for id :: " + id);
+        }
+        return employee1;
+        
     }
 
     @Override
