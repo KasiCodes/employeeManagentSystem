@@ -43,5 +43,12 @@ public class employeeServiceImpl implements employeeService {
     public void saveEmployee(employee employee) {
         this.employeeRepository.save(employee);
     }
+
+    @Override
+    public String deleteEmployeeById(long id) {
+        this.employeeRepository.deleteById(id);
+        return "redirect:/";
+        
+    }
     
 }

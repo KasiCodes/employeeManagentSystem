@@ -16,5 +16,7 @@ public interface employeeService {
     public employee getEmployeeById(long id);
 
     public employee addEmployee(employee employee);
+
+    public String deleteEmployeeById(long id);
     
 }
