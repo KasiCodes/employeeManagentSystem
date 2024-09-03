@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 
 @Controller
@@ -22,7 +23,7 @@ public class employeeController {
 
     @GetMapping("/")
     public String viewHomePage(Model model){
-        return findPaginated(1, model);
+        return findPaginated(1,"firstName", "asc", model);
 
     }
     @GetMapping("/showNewEmployeeForm")
@@ -56,13 +57,17 @@ public class employeeController {
         return "redirect:/";
     }
     @GetMapping("/page/{pageNo}")
-    public String findPaginated(@PathVariable  (value = "pageNo")int pageNo , Model model){
+    public String findPaginated(@PathVariable  (value = "pageNo")int pageNo ,
+        @RequestParam("sortField") String sortField, @RequestParam("sortDir") String sortDir, Model model){
         int pageSize = 5;
-        Page<employee> page = employeeService.findPaginated(pageNo, pageSize);
+        Page<employee> page = employeeService.findPaginated(pageNo, pageSize , "id" , "asc");
         List<employee> listEmployees = page.getContent();
         model.addAttribute("currentPage", pageNo);
         model.addAttribute("totalPages", page.getTotalPages());
         model.addAttribute("totalItems", page.getTotalElements());
+        model.addAttribute("sortField", sortField);
+        model.addAttribute("sortDir", sortDir);
+        model.addAttribute("reverseSortDir", sortDir.equals("asc") ? "desc" : "asc");
         model.addAttribute("listEmployees", listEmployees);
         return "index";
 

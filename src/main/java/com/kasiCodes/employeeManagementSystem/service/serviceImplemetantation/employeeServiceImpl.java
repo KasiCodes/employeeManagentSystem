@@ -8,7 +8,6 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
-
 import org.springframework.stereotype.Service;
 
 import com.kasiCodes.employeeManagementSystem.model.employee;
@@ -39,10 +38,6 @@ public class employeeServiceImpl implements employeeService {
         
     }
 
-    @Override
-    public employee addEmployee(employee employee) {
-        return employeeRepository.save(employee);
-    }
 
     @Override
     public void saveEmployee(employee employee) {
@@ -57,9 +52,12 @@ public class employeeServiceImpl implements employeeService {
     }
 
     @Override
-    public Page<employee> findPaginated(int pageNo, int pageSize) {
-        Pageable pageable = PageRequest.of(pageNo -1 , pageSize);
+    public Page<employee> findPaginated(int pageNo, int pageSize , String sortField, String sortDir) {
+        Sort sort = sortDir.equals("asc") ? Sort.by(sortField).ascending() : Sort.by(sortField).descending();
+        sort = sortDir.equals("asc") ? sort.ascending() : sort.descending();
+        Pageable pageable = PageRequest.of(pageNo - 1, pageSize, sort);
         return this.employeeRepository.findAll(pageable);
+     
     }
     
     
