@@ -2,6 +2,7 @@ package com.kasiCodes.employeeManagementSystem.service;
 
 import java.util.List;
 
+import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Service;
 
 import com.kasiCodes.employeeManagementSystem.model.employee;
@@ -18,5 +19,6 @@ public interface employeeService {
     public employee addEmployee(employee employee);
 
     public String deleteEmployeeById(long id);
-    
+
+    Page <employee> findPaginated(int pageNo, int pageSize);
 }
