@@ -15,6 +15,7 @@
         <h2>Update Employee</h2>  
 
         <form action="#" th:action="@{/saveEmployee}" th:object="${employee}" method="POST">
+            <input type="hidden" th:field="*{id}" />
             <input type="text" th:field="*{firstName}" class="form-control mb-4 col-4" placeholder="First Name">
             <input type="text" th:field="*{secondName}" class="form-control mb-4 col-4" placeholder="Last Name">
             <input type="text" th:field="*{email}" class="form-control mb-4 col-4" placeholder="Email">
