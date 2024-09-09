@@ -21,6 +21,12 @@ public class employeeController {
     @Autowired
     private employeeService employeeService;
 
+    
+    @GetMapping("/login")
+    public String login(){
+        return "login";
+    }
+
     @GetMapping("/")
     public String viewHomePage(Model model){
         return findPaginated(1,"firstName", "asc", model);
