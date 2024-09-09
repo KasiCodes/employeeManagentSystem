@@ -3,6 +3,8 @@ package com.kasiCodes.employeeManagementSystem.controller;
 import com.kasiCodes.employeeManagementSystem.model.employee;
 import com.kasiCodes.employeeManagementSystem.service.employeeService;
 
+import jakarta.servlet.http.HttpSession;
+
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,12 +24,22 @@ public class employeeController {
     private employeeService employeeService;
 
     
-    @GetMapping("/login")
-    public String login(){
+    @GetMapping("/")
+    public String login() {
         return "login";
     }
 
-    @GetMapping("/")
+    @PostMapping("/login")
+    public String login(@RequestParam String username, @RequestParam String password, HttpSession session) {
+        if (username.equals("admin") && password.equals("admin")) {
+            session.setAttribute("username", username);
+            return "redirect:/viewHomePage";
+        } else {
+            return "redirect:/";
+        }
+    }
+
+    @GetMapping("/viewHomePage")
     public String viewHomePage(Model model){
         return findPaginated(1,"firstName", "asc", model);
 
@@ -44,7 +56,7 @@ public class employeeController {
     public String saveEmployee(@ModelAttribute("employee") employee employee){
         employeeService.saveEmployee(employee);
 
-        return "redirect:/";
+        return "redirect:/viewHomePage";
     }
 
     @GetMapping("/showFormForUpdate/{id}")
