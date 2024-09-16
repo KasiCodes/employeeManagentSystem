@@ -24,19 +24,14 @@ public class employeeController {
     private employeeService employeeService;
 
     
-    @GetMapping("/")
+    @GetMapping("/login")
     public String login() {
         return "login";
     }
 
-    @PostMapping("/login")
-    public String login(@RequestParam String username, @RequestParam String password, HttpSession session) {
-        if (username.equals("admin") && password.equals("admin")) {
-            session.setAttribute("username", username);
-            return "redirect:/viewHomePage";
-        } else {
-            return "redirect:/";
-        }
+    @GetMapping("/")
+    public String home() {
+        return "redirect:/login";
     }
 
     @GetMapping("/viewHomePage")
@@ -72,7 +67,7 @@ public class employeeController {
     public String deleteEmployee(@PathVariable (value = "id") long id){
         
         this.employeeService.deleteEmployeeById(id);
-        return "redirect:/";
+        return "redirect:/viewHomePage";
     }
     @GetMapping("/page/{pageNo}")
     public String findPaginated(@PathVariable  (value = "pageNo")int pageNo ,

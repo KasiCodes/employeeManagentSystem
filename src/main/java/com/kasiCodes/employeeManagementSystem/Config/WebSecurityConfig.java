@@ -1,6 +1,5 @@
 package com.kasiCodes.employeeManagementSystem.Config;
 
-import org.springframework.boot.autoconfigure.kafka.KafkaProperties.Security;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
